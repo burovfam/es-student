@@ -1,9 +1,9 @@
-git version 2.50.1 (Apple Git-155)
-Python 3.11.4
+git version 2.53.0
+Python 3.14.4
 cmake version 4.2.3
-GNU Make 3.81
-arm-none-eabi-gcc (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 15.3.1 20260627
+GNU Make 4.4.1
+arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119
 code 1.133.0
-picotool v2.3.0 (Darwin, AppleClang-21.0.0.21000099, Release)
+picotool v2.3.0 (Linux, GNU-11.4.0, Release)
 pico-sdk 2.3.0
-PICO_SDK_PATH=/Users/ivan/Repositories/pico/pico-sdk
+PICO_SDK_PATH=/home/basil/Repositories/pico/pico-sdk
