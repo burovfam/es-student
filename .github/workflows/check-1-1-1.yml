@@ -1,7 +1,6 @@
 name: 1.1.1 Установка инструментов
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
