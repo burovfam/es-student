@@ -1,52 +1,17 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include <stdio.h>
+#include <string.h>
 #include "led.h"
 #include "log.h"
 #include "device.h"
-#include <string.h>
-
-#define LINE_SIZE 32
-char line[LINE_SIZE];
-unit line_length = 0;
-
-
-
-
-void read_line(void)
-{
-    int symbol = getchar_timeout_us(0);
-
-    if (symbol == PICO_ERROR_TIMEOUT)
-    {
-        return;
-    }
-
-    if (symbol == '\r' || symbol == '\n')
-    {
-        putchar('\n');
-        line[line_length] = '\0';
-
-        if (line_length > 0)
-        {
-            LOG_DBG("got %s\n", line);
-            handle_command(line);
-        }
-
-        line_length = 0;
-        return;
-    }
-
-    if (line_length + 1 < LINE_SIZE)
-    {
-        line[line_length] = (char)symbol;
-        line_length = line_length + 1;
-        putchar(symbol);
-    }
-}
 
 const uint BUTTON_PIN = 15;
 const uint DEBOUNCE_MS = 20;
+
+#define LINE_SIZE 32
+char line[LINE_SIZE];
+uint line_length = 0;
 
 bool get_button_debounce(uint pin)
 {
@@ -81,8 +46,37 @@ void handle_command(const char *command)
     }
 }
 
+void read_line(void)
+{
+    int symbol = getchar_timeout_us(0);
 
+    if (symbol == PICO_ERROR_TIMEOUT)
+    {
+        return;
+    }
 
+    if (symbol == '\r' || symbol == '\n')
+    {
+        putchar('\n');
+        line[line_length] = '\0';
+
+        if (line_length > 0)
+        {
+            LOG_DBG("got %s\n", line);
+            handle_command(line);
+        }
+
+        line_length = 0;
+        return;
+    }
+
+    if (line_length + 1 < LINE_SIZE)
+    {
+        line[line_length] = (char)symbol;
+        line_length = line_length + 1;
+        putchar(symbol);
+    }
+}
 
 int main()
 {
@@ -95,7 +89,7 @@ int main()
 
     bool previous = false;
 
-        while (1)
+    while (1)
     {
         bool current = get_button_debounce(BUTTON_PIN);
 
@@ -107,6 +101,6 @@ int main()
 
         previous = current;
 
-        read_line(); 
+        read_line();
     }
 }
