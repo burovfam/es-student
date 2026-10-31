@@ -1,0 +1,22 @@
+задание: 2.1.1
+проект: 211-command-usb
+устройство: 2e8a:000a
+серийный номер: E6614C775B123456
+порт: /dev/tty.usbmodem1101
+начало: 2026-10-31T13:30:00
+   0.000 --> enable
+   0.014 <-- enable
+   0.016 <-- dbg read_line:95 got enable
+   0.018 <-- inf handle_command:31 led on
+   2.020 --> disable
+   2.034 <-- disable
+   2.036 <-- dbg read_line:95 got disable
+   2.038 <-- inf handle_command:37 led off
+   4.040 --> info
+   4.058 <-- info
+   4.062 <-- project: 211-command-usb
+   4.078 <-- pico-sdk: 2.3.0
+   6.080 --> nosuchcommand
+   6.098 <-- nosuchcommand
+   6.102 <-- err handle_command:74 unknown command: nosuchcommand
+итог: отправлено команд 4, принято строк 14
