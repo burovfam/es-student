@@ -5,6 +5,7 @@
 #include "led.h"
 #include "log.h"
 #include "device.h"
+#include "memory.h"
 
 const uint BUTTON_PIN = 15;
 const uint DEBOUNCE_MS = 20;
@@ -13,10 +14,8 @@ const uint DEBOUNCE_MS = 20;
 char line[LINE_SIZE];
 uint line_length = 0;
 
-// 1. Объявляем тип-указатель на функцию
 typedef void (*command_handler_t)(void);
 
-// 2. Функции-обработчики для каждой команды
 void cmd_enable(void)
 {
     led_set(true);
@@ -44,7 +43,11 @@ void cmd_ping(void)
     printf("pong\n");
 }
 
-// 3. Структура команды и таблица
+void cmd_mem_info(void)
+{
+    mem_info();
+}
+
 struct command_t
 {
     const char *name;
@@ -57,6 +60,7 @@ const struct command_t commands[] = {
     { "info", cmd_info },
     { "version", cmd_version },
     { "ping", cmd_ping },
+    { "mem_info", cmd_mem_info },
 };
 
 #define COMMAND_COUNT (sizeof(commands) / sizeof(commands[0]))
@@ -68,7 +72,6 @@ bool get_button_debounce(uint pin)
     return state && gpio_get(pin);
 }
 
-// 4. Новый handle_command — поиск по таблице
 void handle_command(const char *command)
 {
     for (uint i = 0; i < COMMAND_COUNT; i++)
@@ -82,34 +85,25 @@ void handle_command(const char *command)
             return;
         }
     }
-
     LOG_ERR("unknown command: %s\n", command);
 }
 
 void read_line(void)
 {
     int symbol = getchar_timeout_us(0);
-
-    if (symbol == PICO_ERROR_TIMEOUT)
-    {
-        return;
-    }
-
+    if (symbol == PICO_ERROR_TIMEOUT) return;
     if (symbol == '\r' || symbol == '\n')
     {
         putchar('\n');
         line[line_length] = '\0';
-
         if (line_length > 0)
         {
             LOG_DBG("got %s\n", line);
             handle_command(line);
         }
-
         line_length = 0;
         return;
     }
-
     if (line_length + 1 < LINE_SIZE)
     {
         line[line_length] = (char)symbol;
@@ -132,15 +126,12 @@ int main()
     while (1)
     {
         bool current = get_button_debounce(BUTTON_PIN);
-
         if (previous == true && current == false)
         {
             led_toggle();
             LOG_INF("led %s\n", led_is_on() ? "on" : "off");
         }
-
         previous = current;
-
         read_line();
     }
 }
