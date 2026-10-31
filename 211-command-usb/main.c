@@ -6,7 +6,7 @@
 #include "log.h"
 #include "device.h"
 #include "memory.h"
-#include "command.h" // <-- ДОБАВЛЕНО
+#include "command.h"
 
 const uint BUTTON_PIN = 15;
 const uint DEBOUNCE_MS = 20;
@@ -14,8 +14,6 @@ const uint DEBOUNCE_MS = 20;
 #define LINE_SIZE 32
 char line[LINE_SIZE];
 uint line_length = 0;
-
-// УБРАНЫ typedef и struct
 
 void cmd_enable(void)
 {
@@ -49,9 +47,15 @@ void cmd_mem_info(void)
     mem_info();
 }
 
-void cmd_fw_info(void) // <-- ДОБАВЛЕНО
+void cmd_fw_info(void)
 {
     fw_info();
+}
+
+// НОВЫЙ ОБРАБОТЧИК
+void cmd_dev_info(void)
+{
+    dev_info();
 }
 
 const struct command_t commands[] = {
@@ -61,10 +65,11 @@ const struct command_t commands[] = {
     { "version", cmd_version },
     { "ping", cmd_ping },
     { "mem_info", cmd_mem_info },
-    { "fw_info", cmd_fw_info }, // <-- ДОБАВЛЕНО
+    { "fw_info", cmd_fw_info },
+    { "dev_info", cmd_dev_info }, // <-- ДОБАВЛЕНО
 };
 
-const uint command_count = sizeof(commands) / sizeof(commands[0]); // <-- ЗАМЕНА МАКРОСА
+const uint command_count = sizeof(commands) / sizeof(commands[0]);
 
 bool get_button_debounce(uint pin)
 {
@@ -75,7 +80,7 @@ bool get_button_debounce(uint pin)
 
 void handle_command(const char *command)
 {
-    for (uint i = 0; i < command_count; i++) // <-- ЗАМЕНА
+    for (uint i = 0; i < command_count; i++)
     {
         if (strcmp(command, commands[i].name) == 0)
         {
