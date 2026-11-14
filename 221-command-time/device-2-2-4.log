@@ -1,0 +1,24 @@
+задание: 2.2.4
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: E6614C775B123456
+порт: /dev/tty.usbmodem1101
+начало: 2026-11-15T14:30:00
+   0.000 --> main_time_reset
+   0.014 <-- max reset
+   1.020 --> main_time_exec
+   1.034 <-- iteration avg 2.41 us, max 608 us
+   2.040 --> calc_pi
+   2.054 <-- calc_pi
+   2.056 <-- dbg read_line:144 got calc_pi
+   6.750 <-- pi: 3.14159165
+   6.750 <-- time: 4698 ms
+   6.750 --> main_time_exec
+   6.764 <-- iteration avg 5.60 us, max 4699216 us
+  12.800 --> main_time_exec
+  12.814 <-- iteration avg 2.63 us, max 4699216 us
+  13.800 --> main_time_reset
+  13.814 <-- max reset
+  14.800 --> main_time_exec
+  14.814 <-- iteration avg 2.41 us, max 608 us
+итог: отправлено команд 7, принято строк 14
