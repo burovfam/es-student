@@ -109,6 +109,7 @@ void cmd_uptime(void)
 {
     uptime();
 }
+
 void cmd_clk_sys_low(void)
 {
     clk_sys_low();
@@ -118,6 +119,7 @@ void cmd_clk_sys_default(void)
 {
     clk_sys_default();
 }
+
 const struct command_t commands[] = {
     { "info", cmd_info },
     { "version", cmd_version },
