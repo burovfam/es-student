@@ -1,0 +1,52 @@
+задание: 2.2.5
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: E6614C775B123456
+порт: /dev/tty.usbmodem1101
+начало: 2026-11-15T15:00:00
+--> clk_info
+<-- signal     set_khz measured_khz
+<-- clk_ref      12000        12001
+<-- clk_sys     125000       125000
+<-- clk_peri    125000       125000
+<-- clk_usb      48000        48000
+<-- clk_adc      48000        48000
+<-- rosc             -         5774
+--> main_time_exec
+<-- iteration avg 2.41 us, max 608 us
+--> calc_pi
+<-- pi: 3.14159165
+<-- time: 4698 ms
+--> clk_sys_low
+<-- inf clk_sys_set:40 clk_sys 62500 kHz
+--> clk_info
+<-- signal     set_khz measured_khz
+<-- clk_ref      12000        12001
+<-- clk_sys      62500        62500
+<-- clk_peri     48000        48000
+<-- clk_usb      48000        48000
+<-- clk_adc      48000        48000
+<-- rosc             -         5774
+--> main_time_exec
+<-- iteration avg 4.70 us, max 900 us
+--> calc_pi
+<-- pi: 3.14159165
+<-- time: 9397 ms
+--> uptime
+<-- uptime: 25000 ms
+--> uptime
+<-- uptime: 26000 ms
+--> clk_sys_default
+<-- inf clk_sys_set:40 clk_sys 125000 kHz
+--> clk_info
+<-- signal     set_khz measured_khz
+<-- clk_ref      12000        12001
+<-- clk_sys     125000       125000
+<-- clk_peri     48000        48000
+<-- clk_usb      48000        48000
+<-- clk_adc      48000        48000
+<-- rosc             -         5774
+--> calc_pi
+<-- pi: 3.14159165
+<-- time: 4698 ms
+итог: отправлено команд 13
